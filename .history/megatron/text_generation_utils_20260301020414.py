@@ -769,7 +769,6 @@ def generate_samples_interactive(
                 raw_text += (
                     current_input + "\n"
                 )  # re-add newline since we stripped it on input
-            raw_text = prepend_system_prompt(raw_text)
             context_tokens = neox_args.tokenizer.tokenize(raw_text)
             if len(context_tokens) == 0:
                 context_tokens = [neox_args.tokenizer.eod]
@@ -818,8 +817,7 @@ def generate_samples_interactive(
                     ]
                 )
                 generated_text = neox_args.tokenizer.detokenize(generated_tokens)
-                generated_text = apply_branding(generated_text)
-                print_rank_0("Neurox AI: " + generated_text)
+                print_rank_0("Generated Text: " + generated_text)
         if torch.distributed.is_initialized() and torch.distributed.get_rank() == 0:
             _ = input("\n<press enter to continue>")
 

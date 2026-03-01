@@ -1,0 +1,30 @@
+# Neurox AI - Configuration for Cog (Replicate)
+# Reference: https://cog.run/yaml
+
+build:
+  gpu: true
+  cuda: "11.8"
+  python_version: "3.10"
+  system_packages:
+    - "libopenmpi-dev"
+    - "git"
+  python_packages:
+    - "torch==2.1.2"
+    - "numpy<2.0"
+    - "transformers==4.38.0"
+    - "tokenizers>=0.12.1"
+    - "sentencepiece"
+    - "tiktoken>=0.1.2"
+    - "regex"
+    - "ftfy>=6.0.1"
+    - "huggingface_hub>=0.11.0"
+    - "pybind11>=2.6.2"
+    - "six"
+    - "jinja2==3.1.4"
+    - "mpi4py>=3.0.3"
+    - "einops"
+  run:
+    - pip install deepspeed@git+https://github.com/EleutherAI/DeeperSpeed.git@91d1c55ba037b5ada99ae14884dff87a4dc5b9ea
+    - pip install lm_dataformat@git+https://github.com/EleutherAI/lm_dataformat.git@4eec05349977071bf67fc072290b95e31c8dd836
+
+predict: "predict.py:Predictor"
